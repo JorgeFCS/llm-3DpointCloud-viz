@@ -1,5 +1,4 @@
-# delphi3d
- LLM-powered interface to interact with XAI-generated 3D point cloud visualizations.
+# A Natural Language Interface for the Visualization and Analysis of 3D Point Cloud Saliency Maps.
 
 ## Backend
 The backend uses the [FastAPI](https://fastapi.tiangolo.com/). The required dependencies are specified in `environment.yml`. You can create an environment with this file using:
