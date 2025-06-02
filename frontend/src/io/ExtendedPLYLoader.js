@@ -3,7 +3,7 @@ import * as THREE from 'three';
 
 export class ExtendedPLYLoader extends PLYLoader {
     parse(text) {
-        // Handle both BufferSource or decoded string
+        // Handle both BufferSource or decoded string.
         const lines = (typeof text === 'string' ? text : new TextDecoder().decode(text)).split('\n');
         let headerEnded = false;
         const headerLines = [];
@@ -22,7 +22,7 @@ export class ExtendedPLYLoader extends PLYLoader {
         for (const line of headerLines) {
             const tokens = line.trim().split(/\s+/);
             if (tokens[0] === 'property' && tokens.length === 3) {
-                propertyNames.push(tokens[2]); // e.g., "x", "y", ..., "attributions"
+                propertyNames.push(tokens[2]); // e.g., "x", "y", ..., "attributions".
             }
         }
 
@@ -30,7 +30,7 @@ export class ExtendedPLYLoader extends PLYLoader {
 
         const parsedValues = dataLines
             .map(line => line.trim().split(/\s+/).map(Number))
-            .filter(arr => arr.length === propertyNames.length); // Ensure row has expected # of columns
+            .filter(arr => arr.length === propertyNames.length); // Ensure row has expected # of columns.
 
         const numVertices = parsedValues.length;
 
@@ -45,7 +45,7 @@ export class ExtendedPLYLoader extends PLYLoader {
 
         for (let i = 0; i < numVertices; i++) {
             const row = parsedValues[i];
-            if (!row) continue; // Defensive check
+            if (!row) continue; // Defensive check.
             for (let j = 0; j < columns; j++) {
                 arrays[propertyNames[j]][i] = row[j];
             }

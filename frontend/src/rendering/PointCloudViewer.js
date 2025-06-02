@@ -1,11 +1,9 @@
 import React, { useEffect, useRef, useState, useImperativeHandle, forwardRef } from 'react';
 import { Card, Form, Container, Row, Col, Button } from 'react-bootstrap';
 import * as THREE from 'three';
-// import { OrbitControls } from 'three-stdlib';
 import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls';
 import { interpolateInferno, interpolateRdBu, schemeObservable10, interpolateViridis } from 'd3-scale-chromatic';
 import { quantileSorted } from 'd3-array';
-
 
 import { colorizeByAttribute } from '../utils/colorizeByAttribute';
 // Works for custom attributes, only for ASCII PLY files.
@@ -14,7 +12,6 @@ import GeomHistogram from '../chart/GeomHistogram';
 import ColorBar from './ColorBar';
 
 const PointCloudViewer = forwardRef(({ setCsvName, plotConfigs, setPlotConfig, removePlotConfig }, ref) => {
-    // Initializing references.
     const mountRef = useRef();
     const sceneRef = useRef();
     const rendererRef = useRef();
@@ -29,31 +26,6 @@ const PointCloudViewer = forwardRef(({ setCsvName, plotConfigs, setPlotConfig, r
     const [classColorMap, setClassColorMap] = useState(new Map());
     const [colorBarRange, setColorBarRange] = useState(null);
 
-    /* const [dataset, setDataset] = useState([
-        { x: 11, y: 45 },
-        { x: 15, y: 78 },
-        { x: 22, y: 34 },
-        { x: 25, y: 12 },
-        { x: 26, y: 56 },
-        { x: 31, y: 90 },
-        { x: 33, y: 23 },
-        { x: 55, y: 67 },
-        { x: 77, y: 45 },
-        { x: 92, y: 89 }
-    ]);
-    const chartDimensions = {
-        width: 100,
-        height: 550,
-        marginLeft: 45,
-        marginRight: 30,
-    }
-    const [chartConfig, setChartConfig] = useState({
-        x: "y",
-        bins: 10,
-        xLabel: "Attributions"
-    }) */
-
-    // Ideally, this could be given by the user as a file.
     const classLabelMap = {
         0: 'Ceiling',
         1: 'Floor',
@@ -69,7 +41,6 @@ const PointCloudViewer = forwardRef(({ setCsvName, plotConfigs, setPlotConfig, r
         11: 'Board',
         12: 'Clutter'
     };
-
 
     const pointMaterial = useRef(new THREE.PointsMaterial({
         size: pointSize,
@@ -142,12 +113,12 @@ const PointCloudViewer = forwardRef(({ setCsvName, plotConfigs, setPlotConfig, r
             const height = mount.clientHeight;
             camera.aspect = width / height;
             camera.updateProjectionMatrix();
-            renderer.setSize(width, height, false); // `false` keeps canvas style from being overwritten
+            renderer.setSize(width, height, false); // `false` keeps canvas style from being overwritten.
         };
 
         const resizeObserver = new ResizeObserver(resize);
         resizeObserver.observe(mount);
-        resize(); // Initial resize
+        resize(); // Initial resize.
 
         const animate = () => {
             requestAnimationFrame(animate);
@@ -172,7 +143,6 @@ const PointCloudViewer = forwardRef(({ setCsvName, plotConfigs, setPlotConfig, r
 
         const loader = new ExtendedPLYLoader();
         loader.load(fileURL, geometry => {
-            // Normals computed for shading; we might wanna visualize these as well.
             geometry.computeVertexNormals();
             setLoadedGeometry(geometry);
         });
@@ -329,15 +299,11 @@ const PointCloudViewer = forwardRef(({ setCsvName, plotConfigs, setPlotConfig, r
 
     useImperativeHandle(ref, () => ({
         generatePlotFromGeometry: (plotRequest) => {
-            console.log("Entra imperative handle");
             const data = extractPointCloudData(loadedGeometry);
-            console.log("Carga datos");
             if (!data.length) return;
-            console.log("Despues de if");
-            console.log(plotRequest);
+
             const plot = {
                 id: plotRequest.id,
-                //type: plotRequest.plot_type,
                 data,
                 config: {
                     "x": plotRequest.x,
@@ -346,8 +312,6 @@ const PointCloudViewer = forwardRef(({ setCsvName, plotConfigs, setPlotConfig, r
                     "yLabel": plotRequest.yLabel
                 }
             };
-            console.log("Despues de plot");
-            console.log(plot);
         
             setPlotConfig(plot);
         }

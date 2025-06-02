@@ -1,8 +1,6 @@
-//import logo from './logo.svg';
 import './App.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useState, useRef } from 'react';
-
 
 import PointCloudViewer from './rendering/PointCloudViewer';
 import ChatBox from './chat/ChatBox';

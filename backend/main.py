@@ -16,9 +16,7 @@ from utils.utils import ply_to_dataframe, clean_gpt_code, get_latest_assistant_r
 
 load_dotenv()
 
-#router = APIRouter()
 openai_api_key = os.getenv("OPENAI_API_KEY")
-
 app = FastAPI()
 
 # Allow CORS for frontend (adjust for production)
@@ -68,7 +66,7 @@ if not assistant_id:
     )
     assistant_id = assistant.id
 
-# Request schema
+# Request schema.
 class ChatRequest(BaseModel):
     message: str
 
@@ -76,19 +74,6 @@ class AnalyticsRequest(BaseModel):
     csv_name: str
     question: str
     thread_id: Optional[str] = None
-
-@app.post("/api/chat")
-async def chat(req: ChatRequest):
-    # GPT call
-    response = openai.chat.completions.create(
-        model="gpt-4",
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": req.message}
-        ]
-    )
-    reply = response.choices[0].message.content.strip()
-    return {"reply": reply}
 
 @app.post("/api/upload")
 async def upload_file(file: UploadFile = File(...)):

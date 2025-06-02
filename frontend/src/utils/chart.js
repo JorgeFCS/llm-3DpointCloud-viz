@@ -49,10 +49,10 @@ export const useChartDimensions = (ref, passedDimensions) => {
 
                 const entry = entries[0]
 
-                if (width != entry.contentRect.width) {
+                if (width !== entry.contentRect.width) {
                     setWidth(entry.contentRect.width)
                 }
-                if (height != entry.contentRect.height) {
+                if (height !== entry.contentRect.height) {
                     setHeight(entry.contentRect.height)
                 }
             }

@@ -1,5 +1,4 @@
 import React from 'react';
-import { interpolateInferno, interpolateRdBu } from 'd3-scale-chromatic';
 
 function createColorGradientCSS(interpolator, steps = 20) {
     const colorStops = Array.from({ length: steps }, (_, i) => {
