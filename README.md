@@ -27,3 +27,5 @@ npm start
 ```
 
 You can find a sample 3D point cloud for testing purposes at `frontend/public/sample_point_cloud.ply`.
+
+**Note that both the backend and the frontend should be running for the correct functionality of the system.**
