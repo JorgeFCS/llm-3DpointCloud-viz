@@ -13,7 +13,10 @@ uvicorn main:app --reload
 ```
 
 ### Communication with OpenAI API
-To enable communication with the [OpenAI API](https://platform.openai.com/docs/overview), you need to update the `backend/.env` file with your OpenAI API key. Note that you need a valid key for the system to be able to connect to OpenAI's servers.
+To enable communication with the [OpenAI API](https://platform.openai.com/docs/overview), you need to create a `backend/.env` file with your OpenAI API key. Note that you need a valid key for the system to be able to connect to OpenAI's servers. The key should be specified as follows:
+```
+OPENAI_API_KEY=your_key
+```
 
 ## Frontend
 The frontend uses [React](https://react.dev/). The required dependencies are specified in `package.json`; you can install them by running:
