@@ -1,0 +1,42 @@
+# Ignore point clouds saved in the backend
+backend/uploads/*.csv
+
+# Ignore Python-specific files
+backend/__pycache__/
+backend/utils/__pycache__/
+backend/*.py[cod]
+backend/*.pyo
+backend/*.pyd
+backend/env/
+backend/venv/
+backend/.env
+backend/.pytest_cache/
+backend/.mypy_cache/
+backend/.DS_Store
+
+# Ignore Jupyter notebooks checkpoints if any
+backend/.ipynb_checkpoints/
+
+# Ignore Node/React-specific files
+frontend/node_modules/
+frontend/.env
+frontend/.DS_Store
+frontend/dist/
+frontend/build/
+frontend/.parcel-cache/
+frontend/.next/
+frontend/.turbo/
+
+# Optional log/temp files
+*.log
+*.tmp
+
+# OS/system-specific
+.DS_Store
+Thumbs.db
+
+# Editor/IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
