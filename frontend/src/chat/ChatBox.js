@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Card, Form, Button, ListGroup, Spinner } from 'react-bootstrap';
 
 const ChatBox = ({ csvName, setPlotConfig, onRequestPlotFromGeometry }) => {
@@ -8,6 +8,13 @@ const ChatBox = ({ csvName, setPlotConfig, onRequestPlotFromGeometry }) => {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [threadId, setThreadId] = useState(null);
+
+  const bottomRef = useRef(null); // For automatic scrolling down.
+
+  // Auto-scroll down when messages are updated.
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'auto' });
+  }, [messages]);
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -101,6 +108,7 @@ const ChatBox = ({ csvName, setPlotConfig, onRequestPlotFromGeometry }) => {
               <Spinner animation="border" size="sm" /> Processing...
             </ListGroup.Item>
           )}
+          <div ref={bottomRef} />
         </ListGroup>
       </Card.Body>
 
